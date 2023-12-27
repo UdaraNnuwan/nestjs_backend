@@ -45,4 +45,9 @@ createUser(createUserDto:CreateUserDto)
     return this.userRepository.save(newUser)
 }
 
+findUserByUsername(username:string)
+{
+    return this.userRepository.findOneBy({ username })
+}
+
 }
