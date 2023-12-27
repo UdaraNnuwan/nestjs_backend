@@ -16,10 +16,10 @@ export class User{
 
     @Column({
         name:'email_address',
-        nullable:true,
+        nullable:false,
         default:''
     })
-    emailAddress:string
+    email:string
 
     @Column({
         nullable:false,
