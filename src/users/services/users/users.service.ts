@@ -4,6 +4,7 @@ import { plainToClass } from 'class-transformer';
 import { User as UserEntity } from 'src/typeorm';
 import { CreateUserDto } from 'src/users/dto/createUser.dto';
 import { SerializeUser, User } from 'src/users/types/User';
+import { encodePassword } from 'src/utils/bcrypt';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -41,7 +42,9 @@ getUserById(id:number){
 createUser(createUserDto:CreateUserDto)
 {
     // console.log(createUserDto)
-    const newUser=this.userRepository.create(createUserDto)
+    const password=encodePassword(createUserDto.password)
+    console.log("password===>>",password)
+    const newUser=this.userRepository.create({...createUserDto,password})
     return this.userRepository.save(newUser)
 }
 
