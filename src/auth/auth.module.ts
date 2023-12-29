@@ -6,10 +6,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './utils/LocalStrategy';
+import { SessionSerializer } from './utils/SessionSerializer';
 
 
 @Module({
-  imports:[TypeOrmModule.forFeature([User]) ,PassportModule],
+  imports:[TypeOrmModule.forFeature([User]) ,
+          PassportModule.register({
+            session:true
+          })],
   controllers: [AuthController],
   providers: [
     {
@@ -21,6 +25,7 @@ import { LocalStrategy } from './utils/LocalStrategy';
       useClass : UsersService,
     },
     LocalStrategy,
+    SessionSerializer
     // LocalStrategy
   ],
 })

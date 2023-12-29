@@ -53,4 +53,8 @@ findUserByUsername(username:string)
     return this.userRepository.findOneBy({ username })
 }
 
+findUserById(id:number){
+    return this.userRepository.findOneBy({id})
+}
+
 }
